@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontrakan Baiti Jannati - Rumah Impian Bersama</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f1419;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(118, 75, 162, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+            margin-bottom: 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Visi & Misi Section */
+        .visi-section {
+            background: linear-gradient(135deg, rgba(52, 73, 94, 0.3) 0%, rgba(44, 62, 80, 0.3) 100%);
+        }
+
+        .visi-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .visi-quote {
+            font-size: 2rem;
+            font-style: italic;
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .visi-subtitle {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin-bottom: 3rem;
+        }
+
+        /* Rules Grid */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .rule-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .rule-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .rule-card p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        /* Pembayaran Section */
+        .pembayaran-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        .pembayaran-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .price-new {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2ecc71;
+        }
+
+        .badge {
+            background: #f39c12;
+            color: #000;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .payment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid #667eea;
+        }
+
+        .detail-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-item p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        /* Penghuni Section */
+        .penghuni-section {
+            background: #0f1419;
+        }
+
+        .residents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .resident-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resident-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .resident-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .resident-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .resident-info {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resident-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .resident-detail {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resident-detail strong {
+            color: #e0e0e0;
+        }
+
+        /* Filosofi Section */
+        .filosofi-section {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
+        }
+
+        .filosofi-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filosofi-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(240, 147, 251, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filosofi-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(240, 147, 251, 0.4);
+        }
+
+        .filosofi-question {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f093fb;
+            margin-bottom: 1.5rem;
+        }
+
+        .filosofi-hint {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filosofi-answer {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .filosofi-answer.show {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .filosofi-answer strong {
+            color: #f093fb;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .filosofi-answer p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        /* Motivasi Section */
+        .motivasi-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            text-align: center;
+        }
+
+        .motivasi-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .motivasi-quote {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fbbf24;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .motivasi-subtitle {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .motivasi-desc {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .motivasi-desc strong {
+            color: #fbbf24;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .motivasi-desc p {
+            color: #b0b0b0;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 20, 25, 0.8);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #808080;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 3%;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 3rem 4%;
+            }
+
+            .visi-container {
+                padding: 2rem;
+            }
+
+            .residents-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .resident-image {
+                height: 280px;
+            }
+
+            .resident-card {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-details {
+                grid-template-columns: 1fr;
+            }
+
+            .motivasi-quote {
+                font-size: 2rem;
+            }
+
+            .filosofi-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links a {
+                font-size: 0.7rem;
+            }
+
+            .resident-image {
+                height: 240px;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .motivasi-quote {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🏠 Baiti Jannati</div>
+        <ul class="nav-links">
+            <li><a href="#visi">Visi & Misi</a></li>
+            <li><a href="#pembayaran">Pembayaran</a></li>
+            <li><a href="#penghuni">Penghuni</a></li>
+            <li><a href="#filosofi">Filosofi</a></li>
+            <li><a href="#motivasi">Motivasi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Kontrakan Baiti Jannati</h1>
+            <p>Rumah Impian Bersama, Membangun Masa Depan Bersama</p>
+            <a href="#visi" class="cta-button">Jelajahi Selengkapnya</a>
+        </div>
+    </section>
+
+    <!-- Visi & Misi Section -->
+    <section class="visi-section" id="visi">
+        <h2>Visi & Misi</h2>
+        <div class="visi-container">
+            <div class="visi-quote">"Ngone awak dewe dinggo ngupoyo"</div>
+            <p class="visi-subtitle">Kita bersama-sama untuk maju, berkembang, dan meraih kesuksesan bersama</p>
+
+            <h3 style="color: #e0e0e0; margin-top: 2.5rem; margin-bottom: 1.5rem; font-size: 1.5rem;">Aturan yang Berlaku</h3>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h3>1. Hemat Energi</h3>
+                    <p>Hemat penggunaan listrik dan air untuk efisiensi bersama</p>
+                </div>
+                <div class="rule-card">
+                    <h3>2. Hemat Biaya</h3>
+                    <p>Kelola keuangan operasional dengan bijak dan transparan</p>
+                </div>
+                <div class="rule-card">
+                    <h3>3. Kebersihan</h3>
+                    <p>Jaga kebersihan ruang bersama dengan gotong royong</p>
+                </div>
+                <div class="rule-card">
+                    <h3>4. Waktu & Tenaga</h3>
+                    <p>Hormati waktu dan tenaga setiap penghuni lainnya</p>
+                </div>
+                <div class="rule-card">
+                    <h3>5. Sumber Daya</h3>
+                    <p>Manfaatkan sumber daya secara optimal dan berkelanjutan</p>
+                </div>
+                <div class="rule-card">
+                    <h3>6. Gotong Royong</h3>
+                    <p>Bangun kesadaran kolektif untuk kemajuan bersama</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pembayaran Section -->
+    <section class="pembayaran-section" id="pembayaran">
+        <h2>Sistem Pembayaran</h2>
+        <div class="pembayaran-container">
+            <div class="payment-card">
+                <div class="payment-header">
+                    <div>
+                        <strong>Kontrakan per tahun:</strong>
+                        <br>
+                        <span class="price-original">Rp 18.000.000</span>
+                        <span class="price-new">Rp 16.000.000</span>
+                    </div>
+                    <span class="badge">Sudah Dinego</span>
+                </div>
+            </div>
+
+            <div class="payment-card">
+                <strong style="font-size: 1.2rem; color: #667eea; display: block; margin-bottom: 1.5rem;">Per Orang untuk 6 Bulan</strong>
+                <div class="payment-details">
+                    <div class="detail-item">
+                        <strong>Kontrakan (6 Bulan)</strong>
+                        <p><strong style="color: #2ecc71;">Rp 1.600.000</strong></p>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Air + Sampah + WiFi (Per Bulan)</strong>
+                        <p>Rp 20.000 × 6 bulan<br><strong style="color: #2ecc71;">= Rp 120.000</strong></p>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Listrik (Per Bulan)</strong>
+                        <p>Rp 10.000 × 6 bulan<br><strong style="color: #2ecc71;">= Rp 60.000</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Penghuni Section -->
+    <section class="penghuni-section" id="penghuni">
+        <h2>Penghuni Kontrakan</h2>
+        <div class="residents-grid">
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="wapex.jpeg" alt="Wapex" onerror="this.parentElement.textContent='Wapex'">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Wapex</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="faiq.jpeg" alt="Faiq" onerror="this.parentElement.textContent='Faiq'">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Faiq</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="jeki.jpeg" alt="Jeckie" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\"position:absolute; color:white;\">j</span>'">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Jeckie</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="moden.jpeg" alt="Moden" onerror="this.parentElement.textContent='Moden'">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Moden</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="kamal.jpeg" alt="Kamal" onerror="this.parentElement.textContent='Kamal'">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Kamal</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="algifta.jpeg" alt="Algifta" onerror="this.parentElement.textContent='Algifta'">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Algifta</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filosofi Section -->
+    <section class="filosofi-section" id="filosofi">
+        <h2>Filosofi Kontrakan</h2>
+        <div class="filosofi-container">
+            <div class="filosofi-card" onclick="toggleAnswer(this)">
+                <div class="filosofi-question">Kontrakan Baiti Jannati</div>
+                <p class="filosofi-hint">Klik untuk melihat makna mendalam</p>
+                <div class="filosofi-answer">
+                    <strong>Hapus Ego Didalam Diri Piyambak-Piyambak</strong>
+                    <p>ben mengken dados tiang sing sae kang</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivasi Section -->
+    <section class="motivasi-section" id="motivasi">
+        <h2>Motivasi & Inspirasi</h2>
+        <div class="motivasi-container">
+            <div class="motivasi-quote">Innammaal Usri Yusro</div>
+            <div class="motivasi-desc">
+                <strong>"Sopo seng gelem ngupoyo bakale mulyo"</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Kontrakan Baiti Jannati. Rumah Impian Bersama | Berjuang Bersama, Sukses Bersama</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.filosofi-answer');
+            answer.classList.toggle('show');
+        }
+    </script>
+
+</body>
+</html>
