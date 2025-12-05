@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontrakan Baiti Jannati - Rumah Impian Bersama</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-dark: #764ba2;
+            --accent: #f093fb;
+            --gold: #fbbf24;
+            --green: #2ecc71;
+            --red: #e74c3c;
+            --bg-dark: #0f1419;
+            --bg-surface: #1a1f2e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --border-color: rgba(102, 126, 234, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.98);
+            backdrop-filter: blur(12px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.2) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.1rem 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.35);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 50px rgba(102, 126, 234, 0.45);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px);
+        }
+
+        .chevron-icon {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 5%;
+            margin-bottom: 0;
+        }
+
+        section h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        /* Visi & Misi Section */
+        .visi-section {
+            background: linear-gradient(135deg, rgba(52, 73, 94, 0.25) 0%, rgba(44, 62, 80, 0.25) 100%);
+        }
+
+        .visi-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            backdrop-filter: blur(12px);
+            text-align: center;
+        }
+
+        .visi-quote {
+            font-size: 2.2rem;
+            font-style: italic;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .visi-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 3.5rem;
+            font-weight: 500;
+            line-height: 1.8;
+        }
+
+        .rules-title {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 2.5rem;
+            font-weight: 800;
+        }
+
+        /* Rules Grid */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .rule-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+
+        .rule-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .rule-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .rule-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Pembayaran Section */
+        .pembayaran-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+        }
+
+        .pembayaran-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            backdrop-filter: blur(12px);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .payment-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .payment-header strong {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: var(--red);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .price-new {
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: var(--green);
+        }
+
+        .badge {
+            background: linear-gradient(135deg, var(--gold), #f59e0b);
+            color: #000;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .payment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            background: rgba(102, 126, 234, 0.12);
+            padding: 1.8rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            border: 1px solid rgba(102, 126, 234, 0.15);
+            border-left: 4px solid var(--primary);
+        }
+
+        .detail-item strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .detail-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .detail-item .amount {
+            color: var(--green);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Penghuni Section */
+        .penghuni-section {
+            background: var(--bg-dark);
+        }
+
+        .residents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .resident-card {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .resident-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.25);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .resident-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .resident-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .resident-info {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resident-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .resident-detail {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .resident-detail strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* Filosofi Section */
+        .filosofi-section {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.12) 0%, rgba(245, 87, 108, 0.12) 100%);
+        }
+
+        .filosofi-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .filosofi-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(240, 147, 251, 0.25);
+            backdrop-filter: blur(12px);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .filosofi-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(240, 147, 251, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .filosofi-question {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .filosofi-hint {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .filosofi-answer {
+            background: rgba(102, 126, 234, 0.15);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-top: 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .filosofi-answer.show {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        .filosofi-answer strong {
+            color: var(--accent);
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .filosofi-answer p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* Motivasi Section */
+        .motivasi-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            text-align: center;
+        }
+
+        .motivasi-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .motivasi-quote {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            letter-spacing: -1px;
+        }
+
+        .motivasi-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .motivasi-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        .motivasi-card h4 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .motivasi-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 20, 25, 0.9);
+            padding: 2.5rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 3%;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                margin-top: 50px;
+                min-height: calc(100vh - 50px);
+                padding: 3rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.9rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            section {
+                padding: 4rem 3%;
+            }
+
+            .visi-container {
+                padding: 2rem;
+            }
+
+            .residents-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .resident-image {
+                height: 250px;
+            }
+
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-details {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .motivasi-quote {
+                font-size: 2rem;
+            }
+
+            .filosofi-card {
+                padding: 2rem;
+            }
+
+            .filosofi-question {
+                font-size: 1.5rem;
+            }
+
+            .rules-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links a {
+                font-size: 0.65rem;
+            }
+
+            .resident-image {
+                height: 220px;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .motivasi-quote {
+                font-size: 1.5rem;
+            }
+
+            .filosofi-question {
+                font-size: 1.3rem;
+            }
+
+            .visi-quote {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 3rem 2%;
+            }
+
+            .payment-card {
+                padding: 1.5rem;
+            }
+
+            .visi-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🏠 Baiti Jannati</div>
+        <ul class="nav-links">
+            <li><a href="#visi">Visi & Misi</a></li>
+            <li><a href="#pembayaran">Pembayaran</a></li>
+            <li><a href="#penghuni">Penghuni</a></li>
+            <li><a href="#filosofi">Filosofi</a></li>
+            <li><a href="#motivasi">Motivasi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Kontrakan Baiti Jannati</h1>
+            <p>Rumah Impian Bersama, Membangun Masa Depan Bersama</p>
+            <button onclick="document.getElementById('visi').scrollIntoView({behavior: 'smooth'})" class="cta-button">
+                Jelajahi Selengkapnya
+                <span>↓</span>
+            </button>
+        </div>
+        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite;">
+            <span style="color: var(--text-secondary); opacity: 0.7;">↓</span>
+        </div>
+    </section>
+
+    <!-- Visi & Misi Section -->
+    <section class="visi-section" id="visi">
+        <h2>Visi & Misi</h2>
+        <div class="visi-container">
+            <div class="visi-quote">"Ngone awak dewe dinggo ngupoyo"</div>
+            <p class="visi-subtitle">Kita bersama-sama untuk maju, berkembang, dan meraih kesuksesan bersama</p>
+
+            <h3 class="rules-title">Aturan yang Berlaku</h3>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h3>⚡ 1. Hemat Energi</h3>
+                    <p>Hemat penggunaan listrik dan air untuk efisiensi bersama</p>
+                </div>
+                <div class="rule-card">
+                    <h3>💰 2. Hemat Biaya</h3>
+                    <p>Kelola keuangan operasional dengan bijak dan transparan</p>
+                </div>
+                <div class="rule-card">
+                    <h3>💧 3. Kebersihan</h3>
+                    <p>Jaga kebersihan ruang bersama dengan gotong royong</p>
+                </div>
+                <div class="rule-card">
+                    <h3>⏰ 4. Waktu & Tenaga</h3>
+                    <p>Hormati waktu dan tenaga setiap penghuni lainnya</p>
+                </div>
+                <div class="rule-card">
+                    <h3>♻️ 5. Sumber Daya</h3>
+                    <p>Manfaatkan sumber daya secara optimal dan berkelanjutan</p>
+                </div>
+                <div class="rule-card">
+                    <h3>👥 6. Gotong Royong</h3>
+                    <p>Bangun kesadaran kolektif untuk kemajuan bersama</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pembayaran Section -->
+    <section class="pembayaran-section" id="pembayaran">
+        <h2>Sistem Pembayaran</h2>
+        <div class="pembayaran-container">
+            <div class="payment-card">
+                <div class="payment-header">
+                    <div>
+                        <strong>Kontrakan per Tahun:</strong>
+                        <div class="price-section">
+                            <span class="price-original">Rp 18.000.000</span>
+                            <span class="price-new">Rp 16.000.000</span>
+                        </div>
+                    </div>
+                    <span class="badge">✓ Sudah Dinego</span>
+                </div>
+            </div>
+
+            <div class="payment-card">
+                <strong style="font-size: 1.2rem; color: var(--primary); display: block; margin-bottom: 1.8rem; font-weight: 800;">Per Orang untuk 6 Bulan</strong>
+                <div class="payment-details">
+                    <div class="detail-item">
+                        <strong>Kontrakan (6 Bulan)</strong>
+                        <p>Biaya sewa ruangan<br><span class="amount">Rp 1.600.000</span></p>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Air + Sampah + WiFi</strong>
+                        <p>Rp 20.000 × 6 bulan<br><span class="amount">= Rp 120.000</span></p>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Listrik</strong>
+                        <p>Rp 10.000 × 6 bulan<br><span class="amount">= Rp 60.000</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Penghuni Section -->
+    <section class="penghuni-section" id="penghuni">
+        <h2>Penghuni Kontrakan</h2>
+        <div class="residents-grid">
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23grad1)'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EW%3C/text%3E%3C/svg%3E" alt="Wapex">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Wapex</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='grad2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23grad2)'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EF%3C/text%3E%3C/svg%3E" alt="Faiq">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Faiq</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='grad3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f093fb;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23grad3)'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EJ%3C/text%3E%3C/svg%3E" alt="Jeckie">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Jeckie</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='grad4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23f093fb;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23grad4)'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E" alt="Moden">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Moden</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='grad5' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23fbbf24;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23grad5)'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EK%3C/text%3E%3C/svg%3E" alt="Kamal">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Kamal</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resident-card">
+                <div class="resident-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='grad6' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%232ecc71;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23grad6)'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle' font-weight='bold'%3EA%3C/text%3E%3C/svg%3E" alt="Algifta">
+                </div>
+                <div class="resident-info">
+                    <div class="resident-name">Algifta</div>
+                    <div class="resident-detail">
+                        <span>Kontrakan 6 bulan:</span>
+                        <strong>Rp 1.600.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Air + Sampah + WiFi:</span>
+                        <strong>Rp 20.000</strong>
+                    </div>
+                    <div class="resident-detail">
+                        <span>Listrik:</span>
+                        <strong>Rp 10.000</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filosofi Section -->
+    <section class="filosofi-section" id="filosofi">
+        <h2>Filosofi Nama</h2>
+        <div class="filosofi-container">
+            <div class="filosofi-card" onclick="toggleAnswer(this)">
+                <div class="filosofi-question">Apa arti "Baiti Jannati"?</div>
+                <p class="filosofi-hint">(Klik untuk melihat jawaban)</p>
+                <div class="filosofi-answer">
+                    <strong>Rumahku adalah Surgaku</strong>
+                    <p>Baiti Jannati berasal dari bahasa Arab yang berarti "Rumahku adalah Surgaku". Filosofi ini mengajarkan bahwa rumah adalah tempat ternyaman dan terindah, tempat kita membangun kebahagiaan dan kedamaian bersama keluarga dan orang-orang tercinta. Setiap penghuni adalah keluarga, dan bersama kita ciptakan surga dunia kami.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivasi Section -->
+    <section class="motivasi-section" id="motivasi">
+        <h2>Motivasi & Inspirasi</h2>
+        <div class="motivasi-container">
+            <p class="motivasi-quote">"Qolil wa Dawim"</p>
+            <p class="motivasi-subtitle">Sedikit tetapi Istiqomah. Lebih baik melakukan hal kecil secara konsisten daripada hal besar yang tidak berkelanjutan.</p>
+
+            <div class="motivasi-card">
+                <h4>Filosofi Penghuni Baiti Jannati</h4>
+                <p>Di Kontrakan Baiti Jannati, kami percaya bahwa kesuksesan dibangun dari langkah-langkah kecil yang konsisten. Setiap penghuni adalah keluarga, setiap langkah adalah kemajuan, dan setiap hari adalah kesempatan baru untuk tumbuh bersama. Mari wujudkan impian kita dengan istiqomah dan semangat gotong royong! Bersama kita lebih kuat, bersama kita sukses. 🚀</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Kontrakan Baiti Jannati. Rumah Impian Bersama, Membangun Masa Depan Bersama | Berjuang Bersama, Sukses Bersama 🏠</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.filosofi-answer');
+            answer.classList.toggle('show');
+        }
+
+        // Smooth scroll enhancement
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add scroll animation for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
