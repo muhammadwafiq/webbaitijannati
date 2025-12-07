@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📅 Jadwal Keseharian Wapex</title>
+    <style>
+        :root {
+            --primary: #2180A2;
+            --secondary: #E8B64A;
+            --danger: #C01533;
+            --success: #21A278;
+            --bg-light: #FFFCF9;
+            --bg-dark: #1F2121;
+            --text-light: #133438;
+            --text-dark: #F5F5F5;
+            --border-light: #A7A9A9;
+            --border-dark: #777C7C;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+            background:var(--bg-light); color:var(--text-light);
+            padding:20px; transition:background .3s,color .3s;
+        }
+        body.dark-mode { background:var(--bg-dark); color:var(--text-dark); }
+        .container { max-width:1000px; margin:0 auto; }
+        header {
+            display:flex; justify-content:space-between; align-items:center;
+            margin-bottom:30px; padding:20px;
+            background:linear-gradient(135deg,var(--primary) 0%,#1F6B7D 100%);
+            color:white; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,.1);
+        }
+        header h1 { font-size:28px; font-weight:600; }
+        header p { font-size:14px; opacity:.9; margin-top:5px; }
+        .controls { display:flex; gap:10px; align-items:center; }
+        button {
+            padding:10px 15px; border:none; border-radius:8px;
+            cursor:pointer; font-weight:500; font-size:14px; transition:.3s;
+        }
+        .btn-primary { background:var(--secondary); color:var(--text-light); }
+        .btn-primary:hover { opacity:.9; transform:translateY(-2px); }
+        .btn-secondary {
+            background:rgba(255,255,255,.2); color:white; border:1px solid white;
+        }
+        .btn-secondary:hover { background:rgba(255,255,255,.3); }
+        .day-selector {
+            display:flex; gap:8px; margin-bottom:25px; flex-wrap:wrap;
+            padding:15px; background:var(--bg-light);
+            border-radius:10px; border:1px solid var(--border-light);
+        }
+        body.dark-mode .day-selector {
+            background:rgba(255,255,255,.05); border-color:var(--border-dark);
+        }
+        .day-btn {
+            padding:10px 16px; border:2px solid var(--border-light); background:white;
+            color:var(--text-light); border-radius:8px; cursor:pointer;
+            font-weight:500; font-size:13px; transition:.3s;
+        }
+        body.dark-mode .day-btn {
+            background:rgba(255,255,255,.1); border-color:var(--border-dark);
+            color:var(--text-dark);
+        }
+        .day-btn:hover { border-color:var(--primary); transform:translateY(-2px); }
+        .day-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
+        .main-content { display:grid; grid-template-columns:2fr 1fr; gap:20px; }
+        @media(max-width:768px){ .main-content{ grid-template-columns:1fr; } }
+        .schedule-card {
+            background:white; border-radius:12px; padding:25px;
+            box-shadow:0 2px 10px rgba(0,0,0,.08);
+            border:1px solid var(--border-light);
+        }
+        body.dark-mode .schedule-card {
+            background:rgba(255,255,255,.05); border-color:var(--border-dark);
+        }
+        .schedule-card h2 {
+            font-size:20px; margin-bottom:20px; color:var(--primary);
+            display:flex; align-items:center; gap:10px;
+        }
+        .activity {
+            display:flex; gap:12px; padding:12px; margin-bottom:10px;
+            background:var(--bg-light); border-left:4px solid var(--primary);
+            border-radius:6px; cursor:pointer; transition:.2s;
+        }
+        body.dark-mode .activity { background:rgba(255,255,255,.05); }
+        .activity:hover { transform:translateX(4px); box-shadow:0 2px 8px rgba(0,0,0,.1); }
+        .activity.completed {
+            opacity:.6; background:rgba(33,162,120,.1); border-left-color:var(--success);
+        }
+        .activity input[type="checkbox"]{
+            width:20px; height:20px; cursor:pointer; accent-color:var(--primary);
+            flex-shrink:0; margin-top:2px;
+        }
+        .activity-info { flex:1; }
+        .activity-time { font-weight:600; color:var(--primary); font-size:14px; }
+        .activity-name { font-weight:500; margin:4px 0 2px; font-size:15px; }
+        .activity-priority {
+            display:inline-block; font-size:11px; padding:3px 8px;
+            border-radius:4px; font-weight:600; margin-top:4px;
+        }
+        .priority-high { background:rgba(255,84,89,.2); color:var(--danger); }
+        .priority-important { background:rgba(232,182,74,.2); color:var(--secondary); }
+        .priority-flexible { background:rgba(33,162,120,.2); color:var(--success); }
+        .deepwork-badge {
+            display:inline-block; background:var(--primary); color:white;
+            padding:2px 6px; border-radius:3px; font-size:10px; font-weight:600;
+            margin-left:8px;
+        }
+        .sidebar { display:flex; flex-direction:column; gap:15px; }
+        .card-small {
+            background:white; border-radius:12px; padding:20px;
+            box-shadow:0 2px 10px rgba(0,0,0,.08);
+            border:1px solid var(--border-light);
+        }
+        body.dark-mode .card-small {
+            background:rgba(255,255,255,.05); border-color:var(--border-dark);
+        }
+        .card-small h3 { font-size:16px; margin-bottom:15px; color:var(--primary); }
+        .progress-bar {
+            width:100%; height:24px; background:var(--border-light);
+            border-radius:12px; overflow:hidden; margin-bottom:8px;
+        }
+        body.dark-mode .progress-bar { background:rgba(255,255,255,.1); }
+        .progress-fill {
+            height:100%; background:linear-gradient(90deg,var(--primary) 0%,var(--success) 100%);
+            transition:width .3s; display:flex; align-items:center; justify-content:center;
+            color:white; font-size:12px; font-weight:600;
+        }
+        .stats { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:15px; }
+        .stat-item {
+            background:var(--bg-light); padding:12px; border-radius:8px;
+            text-align:center; border:1px solid var(--border-light);
+        }
+        body.dark-mode .stat-item {
+            background:rgba(255,255,255,.05); border-color:var(--border-dark);
+        }
+        .stat-number { font-size:20px; font-weight:700; color:var(--primary); }
+        .stat-label { font-size:12px; color:var(--text-light); margin-top:4px; }
+        body.dark-mode .stat-label { color:var(--text-dark); }
+        .reflection-area { margin-top:15px; }
+        .reflection-area label {
+            display:block; font-size:12px; font-weight:600; margin-bottom:8px; color:var(--primary);
+        }
+        .reflection-area textarea {
+            width:100%; min-height:100px; padding:10px;
+            border:1px solid var(--border-light); border-radius:6px;
+            font-family:inherit; font-size:13px; resize:vertical;
+            background:var(--bg-light); color:var(--text-light);
+        }
+        body.dark-mode .reflection-area textarea {
+            background:rgba(255,255,255,.05); border-color:var(--border-dark); color:var(--text-dark);
+        }
+        .reflection-area textarea::placeholder { color:var(--border-light); }
+        body.dark-mode .reflection-area textarea::placeholder { color:var(--border-dark); }
+        .weekly-summary {
+            margin-top:25px; padding-top:20px; border-top:2px solid var(--border-light);
+        }
+        body.dark-mode .weekly-summary { border-top-color:var(--border-dark); }
+        .weekly-summary h3 { font-size:16px; margin-bottom:15px; color:var(--primary); }
+        .summary-table { width:100%; font-size:12px; border-collapse:collapse; }
+        .summary-table td {
+            padding:8px 0; border-bottom:1px solid var(--border-light);
+        }
+        body.dark-mode .summary-table td { border-bottom-color:var(--border-dark); }
+        .summary-table td:first-child { font-weight:500; color:var(--primary); }
+        .summary-table td:last-child { text-align:right; font-weight:600; }
+        footer {
+            text-align:center; margin-top:40px; padding:20px;
+            color:var(--border-light); font-size:12px;
+        }
+        body.dark-mode footer { color:var(--border-dark); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>📅 Jadwal Keseharian Wapex</h1>
+                <p>AI Engineer + Bisnis + Chatbot + English</p>
+            </div>
+            <div class="controls">
+                <button class="btn-secondary" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+                <button class="btn-primary" onclick="exportData()">📥 Export</button>
+            </div>
+        </header>
+
+        <div class="day-selector" id="daySelector"></div>
+
+        <div class="main-content">
+            <div class="schedule-card">
+                <h2 id="dayTitle">📍 Senin</h2>
+                <div id="scheduleList"></div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card-small">
+                    <h3>📊 Progress Minggu</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="completedCount">0</div>
+                            <div class="stat-label">Selesai</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalCount">0</div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-small reflection-area">
+                    <label for="reflection">💭 Refleksi Harian</label>
+                    <textarea id="reflection" placeholder="Apa yang tercapai? Apa yang sulit? Rencana besok?"></textarea>
+                    <button class="btn-primary" onclick="saveReflection()" style="width: 100%; margin-top: 10px;">💾 Simpan</button>
+                </div>
+
+                <div class="card-small weekly-summary">
+                    <h3>📈 Ringkasan Mingguan</h3>
+                    <table class="summary-table">
+                        <tr><td>Total Aktivitas</td><td id="weeklyTotal">0</td></tr>
+                        <tr><td>Terselesaikan</td><td id="weeklyCompleted">0</td></tr>
+                        <tr><td>Persentase</td><td id="weeklyPercent">0%</td></tr>
+                        <tr><td>Jam Belajar (Target)</td><td>~25 jam</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>💡 Tip: Centang aktivitas saat selesai. Data tersimpan otomatis di browser kamu.</p>
+            <p>Konsultasi ulang jadwal setiap 2 minggu untuk menyesuaikan dengan perkembangan.</p>
+        </footer>
+    </div>
+
+    <script>
+        const jadwal = {
+            "Senin": [
+                { time: "09:00–16:30", name: "KULIAH PLAI", detail: "C++/Aljabar/etc", priority: "mandatory" },
+                { time: "16:30–17:00", name: "Istirahat + Makan", detail: "", priority: "important" },
+                { time: "17:00–18:30", name: "PYTHON", detail: "AI Engineering (Deep Work)", priority: "high", deepwork: true },
+                { time: "18:30–19:00", name: "Istirahat / Ibadah", detail: "", priority: "important" },
+                { time: "19:00–21:00", name: "CHATBOT E-COMMERCE", detail: "Coding (Deep Work)", priority: "high", deepwork: true },
+                { time: "21:00–22:00", name: "BISNIS", detail: "Riset/Konten/Supply", priority: "high" },
+                { time: "22:00–01:00", name: "ENGLISH / Bebas", detail: "Listening/Speaking + keluarga", priority: "flexible" }
+            ],
+            "Selasa": [
+                { time: "09:00–10:30", name: "C++", detail: "Deep work / project", priority: "high", deepwork: true },
+                { time: "10:30–11:00", name: "Snack Break", detail: "", priority: "flexible" },
+                { time: "11:00–12:30", name: "ALJABAR LINEAR", detail: "Soal + konsep (Deep Work)", priority: "high", deepwork: true },
+                { time: "12:30–13:30", name: "Makan siang + istirahat", detail: "", priority: "important" },
+                { time: "13:30–15:00", name: "PYTHON", detail: "AI/ML tutorial + code (Deep Work)", priority: "high", deepwork: true },
+                { time: "15:00–16:00", name: "CHATBOT E-COMMERCE", detail: "Debug/enhance", priority: "medium" },
+                { time: "16:00–17:00", name: "Olahraga / Refresh", detail: "", priority: "flexible" },
+                { time: "17:00–18:30", name: "ENGLISH", detail: "Video + practice (Deep Work)", priority: "medium", deepwork: true },
+                { time: "18:30–21:00", name: "Bebas / Keluarga", detail: "", priority: "flexible" },
+                { time: "21:00–22:00", name: "BISNIS", detail: "Update, evaluasi, ide konten", priority: "high" },
+                { time: "22:00–01:00", name: "Bebas / Prep tidur", detail: "", priority: "flexible" }
+            ],
+            "Rabu": [
+                { time: "09:00–15:30", name: "KULIAH PLAI", detail: "Python/etc", priority: "mandatory" },
+                { time: "15:30–16:00", name: "Istirahat + Makan", detail: "", priority: "important" },
+                { time: "16:00–17:30", name: "ALJABAR LINEAR", detail: "Latihan soal (Deep Work)", priority: "high", deepwork: true },
+                { time: "17:30–18:00", name: "Istirahat / Ibadah", detail: "", priority: "important" },
+                { time: "18:00–20:00", name: "CHATBOT E-COMMERCE", detail: "Feature baru (Deep Work)", priority: "high", deepwork: true },
+                { time: "20:00–21:00", name: "ENGLISH", detail: "Listening practice", priority: "medium" },
+                { time: "21:00–22:00", name: "BISNIS", detail: "Follow up, planning, data", priority: "high" },
+                { time: "22:00–01:00", name: "Bebas / Keluarga / Prep tidur", detail: "", priority: "flexible" }
+            ],
+            "Kamis": [
+                { time: "09:00–15:20", name: "KULIAH PLAI", detail: "C++/etc", priority: "mandatory" },
+                { time: "15:20–16:00", name: "Istirahat + Makan", detail: "", priority: "important" },
+                { time: "16:00–17:30", name: "PYTHON", detail: "AI project / tutorial (Deep Work)", priority: "high", deepwork: true },
+                { time: "17:30–18:00", name: "Istirahat / Ibadah", detail: "", priority: "important" },
+                { time: "18:00–20:00", name: "CHATBOT E-COMMERCE", detail: "Testing/demo (Deep Work)", priority: "high", deepwork: true },
+                { time: "20:00–21:00", name: "ENGLISH / Bebas", detail: "", priority: "flexible" },
+                { time: "21:00–22:00", name: "BISNIS", detail: "Eksekusi rencana", priority: "high" },
+                { time: "22:00–01:00", name: "Prep tidur / Bebas", detail: "", priority: "flexible" }
+            ],
+            "Jumat": [
+                { time: "09:00–12:00", name: "KULIAH PLAI", detail: "", priority: "mandatory" },
+                { time: "12:00–14:00", name: "Makan + Istirahat", detail: "", priority: "important" },
+                { time: "14:00–16:00", name: "ALJABAR LINEAR / C++", detail: "Fleksibel", priority: "high" },
+                { time: "16:00–17:00", name: "CHATBOT E-commerce", detail: "Sprint", priority: "medium" },
+                { time: "17:00–21:00", name: "ENGLISH / Bisnis / Keluarga", detail: "Fleksibel", priority: "flexible" },
+                { time: "21:00–22:00", name: "BISNIS", detail: "Review minggu, rencana depan", priority: "high" },
+                { time: "22:00–01:00", name: "Istirahat / Prep tidur", detail: "", priority: "flexible" }
+            ],
+            "Sabtu": [
+                { time: "09:00–12:00", name: "BISNIS + PYTHON", detail: "Fleksibel - Prioritas tinggi", priority: "high" },
+                { time: "12:00–14:00", name: "Makan + Istirahat", detail: "", priority: "important" },
+                { time: "14:00–16:00", name: "CHATBOT E-commerce", detail: "Sprint", priority: "high" },
+                { time: "16:00–17:00", name: "C++ / ALJABAR", detail: "Fleksibel", priority: "medium" },
+                { time: "17:00–21:00", name: "ENGLISH / Keluarga", detail: "Fleksibel", priority: "flexible" },
+                { time: "21:00–22:00", name: "BISNIS", detail: "Eksekusi / improvisasi", priority: "high" },
+                { time: "22:00–01:00", name: "Istirahat / Prep tidur", detail: "", priority: "flexible" }
+            ],
+            "Minggu": [
+                { time: "09:00–12:00", name: "BISNIS + Review Minggu", detail: "Perencanaan", priority: "high" },
+                { time: "12:00–14:00", name: "Makan + Istirahat", detail: "", priority: "important" },
+                { time: "14:00–16:00", name: "PYTHON / Deep Review", detail: "Konsolidasi materi", priority: "high" },
+                { time: "16:00–17:00", name: "Olahraga / Refresh", detail: "Mental health", priority: "flexible" },
+                { time: "17:00–21:00", name: "Keluarga / Prep minggu depan", detail: "", priority: "flexible" },
+                { time: "21:00–22:00", name: "BISNIS", detail: "Final check & plan", priority: "high" },
+                { time: "22:00–01:00", name: "Istirahat", detail: "", priority: "flexible" }
+            ]
+        };
+
+        const days = ["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"];
+        let currentDay = "Senin";
+        let completed = {};
+
+        function initUI(){
+            const selector = document.getElementById("daySelector");
+            days.forEach(day=>{
+                const btn=document.createElement("button");
+                btn.className=`day-btn ${day===currentDay?'active':''}`;
+                btn.textContent=day;
+                btn.onclick=()=>selectDay(day);
+                selector.appendChild(btn);
+            });
+            loadData();
+            displayDay(currentDay);
+        }
+
+        function selectDay(day){
+            currentDay=day;
+            document.querySelectorAll(".day-btn").forEach(btn=>{
+                btn.classList.remove("active");
+                if(btn.textContent===day) btn.classList.add("active");
+            });
+            saveReflection();
+            displayDay(day);
+        }
+
+        function displayDay(day){
+            const dayEmoji={
+                "Senin":"📍","Selasa":"🔧","Rabu":"🎓",
+                "Kamis":"💻","Jumat":"🚀","Sabtu":"⚡","Minggu":"🌟"
+            };
+            document.getElementById("dayTitle").textContent=`${dayEmoji[day]} ${day}`;
+            const scheduleList=document.getElementById("scheduleList");
+            scheduleList.innerHTML="";
+            jadwal[day].forEach((activity,idx)=>{
+                const id=`${day}-${idx}`;
+                const isCompleted=completed[id]||false;
+                const div=document.createElement("div");
+                div.className=`activity ${isCompleted?'completed':''}`;
+                const checkbox=document.createElement("input");
+                checkbox.type="checkbox";
+                checkbox.checked=isCompleted;
+                checkbox.onchange=()=>{
+                    completed[id]=checkbox.checked;
+                    updateProgress();
+                    saveData();
+                    div.classList.toggle("completed");
+                };
+                const info=document.createElement("div");
+                info.className="activity-info";
+                const time=document.createElement("div");
+                time.className="activity-time";
+                time.textContent=activity.time;
+                const name=document.createElement("div");
+                name.className="activity-name";
+                name.textContent=activity.name+(activity.detail?` - ${activity.detail}`:"");
+                const priority=document.createElement("span");
+                priority.className=`activity-priority priority-${activity.priority}`;
+                priority.textContent=activity.priority.toUpperCase();
+                if(activity.deepwork){
+                    const badge=document.createElement("span");
+                    badge.className="deepwork-badge";
+                    badge.textContent="🎯 DEEP WORK";
+                    priority.appendChild(badge);
+                }
+                info.appendChild(time);
+                info.appendChild(name);
+                info.appendChild(priority);
+                div.appendChild(checkbox);
+                div.appendChild(info);
+                scheduleList.appendChild(div);
+            });
+            updateProgress();
+            loadReflection();
+        }
+
+        function updateProgress(){
+            let total=0, done=0;
+            days.forEach(day=>{
+                jadwal[day].forEach((_,idx)=>{
+                    total++;
+                    if(completed[`${day}-${idx}`]) done++;
+                });
+            });
+            const percent=Math.round((done/total)*100)||0;
+            document.getElementById("progressFill").style.width=percent+"%";
+            document.getElementById("progressFill").textContent=percent+"%";
+            document.getElementById("completedCount").textContent=done;
+            document.getElementById("totalCount").textContent=total;
+            document.getElementById("weeklyTotal").textContent=total;
+            document.getElementById("weeklyCompleted").textContent=done;
+            document.getElementById("weeklyPercent").textContent=percent+"%";
+        }
+
+        function saveReflection(){
+            const text=document.getElementById("reflection").value;
+            localStorage.setItem(`reflection-${currentDay}`,text);
+        }
+
+        function loadReflection(){
+            const text=localStorage.getItem(`reflection-${currentDay}`)||"";
+            document.getElementById("reflection").value=text;
+        }
+
+        function saveData(){
+            localStorage.setItem("completed",JSON.stringify(completed));
+        }
+
+        function loadData(){
+            const saved=localStorage.getItem("completed");
+            if(saved){ completed=JSON.parse(saved); }
+        }
+
+        function toggleDarkMode(){
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode",document.body.classList.contains("dark-mode"));
+        }
+
+        function exportData(){
+            let text="📅 JADWAL KESEHARIAN WAPEX\n";
+            text+="=".repeat(50)+"\n\n";
+            days.forEach(day=>{
+                text+=`\n${day.toUpperCase()}\n`;
+                text+="-".repeat(40)+"\n";
+                jadwal[day].forEach((activity,idx)=>{
+                    const id=`${day}-${idx}`;
+                    const isCompleted=completed[id]?"✓":"✗";
+                    text+=`${isCompleted} [${activity.time}] ${activity.name}\n`;
+                });
+                const reflection=localStorage.getItem(`reflection-${day}`)||"";
+                if(reflection){ text+=`📝 Refleksi: ${reflection}\n`; }
+                text+="\n";
+            });
+            const blob=new Blob([text],{type:"text/plain"});
+            const url=URL.createObjectURL(blob);
+            const a=document.createElement("a");
+            a.href=url; a.download="jadwal-keseharian-wapex.txt"; a.click();
+        }
+
+        if(localStorage.getItem("darkMode")==="true"){
+            document.body.classList.add("dark-mode");
+        }
+
+        initUI();
+    </script>
+</body>
+</html>
